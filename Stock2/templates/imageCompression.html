@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Image Compression</title>
+    <style>
+        /* Flexbox 스타일 적용 */
+        .image-container {
+            display: flex;
+            justify-content: flex-start; /* 양 옆으로 배치 */
+            align-items: flex-start;
+            gap: 20px; /*두 이미지 사이 간격 */
+        }
+
+        .image-section {
+            flex-basis: auto; /* 이미지 섹션의 크기가 자동으로 조정되도록 설정 */
+        }
+
+        img {
+            display: block;
+            width: 512px;  /* 이미지의 너비를 고정 */
+            height: 512px; /* 이미지의 높이도 고정 */
+            object-fit: cover; /* 이미지가 비율에 맞게 잘리거나 늘어나지 않도록 설정 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="w3-bar w3-border w3-light-grey">
+        <a href = "/" class="w3-bar-item w3-button">Home</a>
+        <a href = "/stock" class="w3-bar-item w3-button">Time-series prediction</a>
+        <a href = "/imageCompression" class="w3-bar-item w3-button">Compression</a>
+    </div>
+
+    <h1>Image Compression</h1>
+
+    <!-- 파일 업로드 및 압축 비율 입력 폼 -->
+    <form action="/imageCompression" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" required> <!-- 파일 선택 -->
+        <input type="text" name="red_ratio" placeholder="Red Ratio" />
+        <input type="text" name="green_ratio" placeholder="Green Ratio" />
+        <input type="text" name="blue_ratio" placeholder="Blue Ratio" />
+        <button type="submit">Compress Image</button>
+    </form>
+
+    <!-- 원본 및 압축된 이미지 양 옆 배치 -->
+    <div class="image-container">
+        <!-- Original Image Section -->
+        {% if original_image_file %}
+        <div class="image-section">
+            <h2>Original Image</h2>
+            <img src="{{ original_image_file }}" alt="Original Image">
+        </div>
+        {% endif %}
+
+        <!-- Compressed Image Section -->
+        {% if compressed_image_file %}
+        <div class="image-section">
+            <h2>Compressed Image</h2>
+            <img src="{{ compressed_image_file }}" alt="Compressed Image">
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
